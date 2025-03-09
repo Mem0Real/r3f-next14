@@ -30,6 +30,7 @@ export const Dome = ({ url, ...props }) => {
 }
 const View = forwardRef(({ children, orbit, zoom = false, ...props }, ref) => {
   const localRef = useRef(null)
+
   useImperativeHandle(ref, () => localRef.current)
 
   return (
@@ -44,7 +45,7 @@ const View = forwardRef(({ children, orbit, zoom = false, ...props }, ref) => {
               enablePan={false}
               dampingFactor={0.2}
               minDistance={1}
-              maxDistance={10}
+              maxDistance={8}
               minPolarAngle={Math.PI / 6}
               maxPolarAngle={Math.PI / 1.8}
             />
