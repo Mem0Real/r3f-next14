@@ -7,6 +7,7 @@ import { Dome } from '@/components/canvas/View'
 import { Ground } from '@/components/canvas/Ground'
 
 import { buildingText1, buildingText2, buildingText3 } from '@/helpers/global'
+import { Button } from './components/ui/button'
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
@@ -40,46 +41,66 @@ export default function Page() {
       <div className='grid grid-cols-1 justify-items-center w-full lg:w-[90%]'>
         <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
           <TextGenerator building={buildingText1} />
-          <View
-            orbit
-            className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
-          >
-            <Suspense fallback={null}>
-              <Building1 />
-              <Common />
-              <Dome url='/img/sky1HD.png' className='hidden ' />
-              <Ground />
-            </Suspense>
-          </View>
+          <div className='relative flex flex-col group'>
+            <View
+              orbit
+              className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
+            >
+              <Suspense fallback={null}>
+                <Building1 />
+                <Common />
+                <Dome url='/img/sky1HD.png' />
+                <Ground />
+              </Suspense>
+            </View>
+            <div className='w-full h-12 flex-col justify-center items-center text-3xl absolute bottom-0 left-1/2 -translate-x-1/2 z-10 bg-black/60 hidden group-hover:flex rounded-b-3xl overflow-clip'>
+              <Button variant='ghost' className='text-white' onClick={() => console.log('b1')}>
+                Enter Scene
+              </Button>
+            </div>
+          </div>
         </div>
         <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
-          <View
-            orbit
-            className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
-          >
-            <Suspense fallback={null}>
-              <Building2 />
-              <Common />
-              <Dome url='/img/sky2HD.png' className='hidden ' />
-              <Ground />
-            </Suspense>
-          </View>
+          <div className='relative flex flex-col group'>
+            <View
+              orbit
+              className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
+            >
+              <Suspense fallback={null}>
+                <Building2 />
+                <Common />
+                <Dome url='/img/sky2HD.png' className='hidden ' />
+                <Ground />
+              </Suspense>
+            </View>
+            <div className='w-full h-12 flex-col justify-center items-center text-3xl absolute bottom-0 left-1/2 -translate-x-1/2 z-10 bg-black/60 hidden group-hover:flex rounded-b-3xl overflow-clip'>
+              <Button variant='ghost' className='text-white' onClick={() => console.log('b2')}>
+                Enter Scene
+              </Button>
+            </div>
+          </div>
           <TextGenerator building={buildingText2} />
         </div>
         <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
           <TextGenerator building={buildingText3} />
-
-          <View
-            orbit
-            className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
-          >
-            <Suspense fallback={null}>
-              <Building3 />
-              <Common />
-              <Dome url='/img/sky3HD.png' className='hidden ' />
-              <Ground />
-            </Suspense>
-          </View>
+          <div className='relative flex flex-col group'>
+            <View
+              orbit
+              className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
+            >
+              <Suspense fallback={null}>
+                <Building3 />
+                <Common />
+                <Dome url='/img/sky3HD.png' className='hidden ' />
+                <Ground />
+              </Suspense>
+            </View>
+            <div className='w-full h-12 flex-col justify-center items-center text-3xl absolute bottom-0 left-1/2 -translate-x-1/2 z-10 bg-black/60 hidden group-hover:flex rounded-b-3xl overflow-clip'>
+              <Button variant='ghost' className='text-white' onClick={() => console.log('b3')}>
+                Enter Scene
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
