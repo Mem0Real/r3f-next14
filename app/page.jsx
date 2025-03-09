@@ -3,6 +3,8 @@
 import dynamic from 'next/dynamic'
 import { Suspense } from 'react'
 import Navbar from './components/Navbar'
+import { Dome } from '@/components/canvas/View'
+import { Ground } from '@/components/canvas/Ground'
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
@@ -30,69 +32,104 @@ const Building3 = dynamic(() => import('@/components/canvas/Buildings').then((mo
 
 export default function Page() {
   return (
-    <>
+    <main className='w-full flex flex-col justify-between items-center gap-12'>
       <Navbar />
-      <div className='h-40'></div>
-      <div className='w-full flex flex-col gap-12'>
-        <div className='mx-auto flex w-full flex-col flex-wrap items-center md:flex-row  lg:w-4/5'>
-          {/* jumbo */}
-          <div className='flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left'>
-            <p className='w-full uppercase'>Next + React Three Fiber</p>
-            <h1 className='my-4 text-5xl font-bold leading-tight'>Next 3D Starter</h1>
-            <p className='mb-8 text-2xl leading-normal'>
-              A minimalist starter for React, React-three-fiber and Threejs.
-            </p>
-          </div>
 
-          <div className='w-full text-center md:w-3/5'>
-            <View orbit className='flex h-96 w-full flex-col items-center justify-center'>
-              <Suspense fallback={null}>
-                {/* <Logo route='/blob' scale={0.6} position={[0, 0, 0]} /> */}
-                <Building1 />
-                <Common />
-              </Suspense>
-            </View>
+      <div className='grid grid-cols-1 justify-items-center border-4 w-full lg:w-[90%]'>
+        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
+          <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
+            <h1 className='text-4xl font-bold'>Building-1</h1>
+            <h1 className='font-semibold'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
+              egestas risus. Nunc lobortis ullamcorper arcu at tempor.
+            </h1>
           </div>
+          <View
+            orbit
+            className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
+          >
+            <Suspense fallback={null}>
+              <Building1 />
+              <Common />
+              <Dome url='/img/sky1HD.png' className='hidden ' />
+              <Ground />
+            </Suspense>
+          </View>
+        </div>
+        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
+          <View
+            orbit
+            className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
+          >
+            <Suspense fallback={null}>
+              <Building2 />
+              <Common />
+              <Dome url='/img/sky2HD.png' className='hidden ' />
+              <Ground />
+            </Suspense>
+          </View>
+          <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
+            <h1 className='text-4xl font-bold'>Building-2</h1>
+            <h1 className='font-semibold'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
+              egestas risus. Nunc lobortis ullamcorper arcu at tempor.
+            </h1>
+          </div>
+        </div>
+        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
+          <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
+            <h1 className='text-4xl font-bold'>Building-3</h1>
+            <h1 className='font-semibold'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
+              egestas risus. Nunc lobortis ullamcorper arcu at tempor.
+            </h1>
+          </div>
+          <View
+            orbit
+            className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
+          >
+            <Suspense fallback={null}>
+              <Building3 />
+              <Common />
+              <Dome url='/img/sky3HD.png' className='hidden ' />
+              <Ground />
+            </Suspense>
+          </View>
         </div>
 
-        <div className='mx-auto flex w-full flex-col flex-wrap items-center p-12 md:flex-row  lg:w-4/5'>
-          {/* first row */}
-          <div className='relative  w-full py-6 sm:w-1/2'>
-            <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Events are propagated</h2>
-            <p className='mb-8 text-gray-600'>Drag, scroll, pinch, and rotate the canvas to explore the 3D scene.</p>
-          </div>
-          <div className='relative w-full py-6 sm:w-1/2 sm:h-48 md:h-96 '>
-            <View orbit className='relative h-full sm:w-full'>
-              <Suspense fallback={null}>
-                {/* <Dog scale={2} position={[0, -1.6, 0]} rotation={[0.0, -0.3, 0]} /> */}
-                <Building2 />
-                <Common color={'lightpink'} />
-              </Suspense>
-            </View>
-          </div>
-        </div>
-        <div className='mx-auto flex w-full flex-col flex-wrap items-center p-12 md:flex-row lg:w-4/5'>
-          {/* second row */}
-          <div className='relative  w-full py-6 sm:w-1/2 '>
-            <View orbit className='relative h-full sm:h-48 sm:w-full'>
-              <Suspense fallback={null}>
-                {/* <Duck route='/blob' scale={2} position={[0, -1.6, 0]} /> */}
-                <Building3 />
-                <Common color={'lightblue'} />
-              </Suspense>
-            </View>
-          </div>
-          <div className='w-full p-6 sm:w-1/2'>
-            <h2 className='mb-3 text-3xl font-bold leading-none text-gray-800'>Dom and 3D are synchronized</h2>
-            <p className='mb-8 text-gray-600'>
-              3D Divs are renderer through the View component. It uses gl.scissor to cut the viewport into segments. You
-              tie a view to a tracking div which then controls the position and bounds of the viewport. This allows you
-              to have multiple views with a single, performant canvas. These views will follow their tracking elements,
-              scroll along, resize, etc.
-            </p>
+        {/* <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 p-4 m-12 place-items-center'>
+          <View orbit className='w-full h-96 cursor-grab active:cursor-grabbing'>
+            <Suspense fallback={null}>
+              <Building2 />
+              <Common />
+              <Dome url='/img/sky2.png' />
+            </Suspense>
+          </View>
+          <div className='flex flex-col justify-center items-start gap-8 ps-16 py-12'>
+            <h1 className='text-4xl font-bold'>Building</h1>
+            <h1 className='font-semibold'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
+              egestas risus. Nunc lobortis ullamcorper arcu at tempor. 
+            </h1>
           </div>
         </div>
+        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 p-4 m-12 place-items-center'>
+          <div className='flex flex-col justify-center items-start gap-8 ps-16 py-12'>
+            <h1 className='text-4xl font-bold'>Building</h1>
+            <h1 className='font-semibold'>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
+              egestas risus. Nunc lobortis ullamcorper arcu at tempor. 
+            </h1>
+          </div>
+          <View orbit className='w-full h-96 cursor-grab active:cursor-grabbing'>
+            <Suspense fallback={null}>
+              <Building3 />
+              <Common />
+              <Dome url='/img/sky3.png' />
+            </Suspense>
+          </View>
+        </div> */}
       </div>
-    </>
+    </main>
   )
 }
