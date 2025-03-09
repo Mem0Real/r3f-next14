@@ -43,6 +43,8 @@ const View = forwardRef(({ children, orbit, zoom = false, ...props }, ref) => {
               enableZoom={zoom}
               enablePan={false}
               dampingFactor={0.2}
+              minDistance={1}
+              maxDistance={10}
               minPolarAngle={Math.PI / 6}
               maxPolarAngle={Math.PI / 1.8}
             />

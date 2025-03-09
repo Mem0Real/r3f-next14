@@ -6,6 +6,8 @@ import Navbar from './components/Navbar'
 import { Dome } from '@/components/canvas/View'
 import { Ground } from '@/components/canvas/Ground'
 
+import { buildingText1, buildingText2, buildingText3 } from '@/helpers/global'
+
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
 const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
@@ -35,15 +37,9 @@ export default function Page() {
     <main className='w-full flex flex-col justify-between items-center gap-12'>
       <Navbar />
 
-      <div className='grid grid-cols-1 justify-items-center border-4 w-full lg:w-[90%]'>
-        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
-          <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
-            <h1 className='text-4xl font-bold'>Building-1</h1>
-            <h1 className='font-semibold'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
-              egestas risus. Nunc lobortis ullamcorper arcu at tempor.
-            </h1>
-          </div>
+      <div className='grid grid-cols-1 justify-items-center w-full lg:w-[90%]'>
+        <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
+          <TextGenerator building={buildingText1} />
           <View
             orbit
             className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
@@ -56,7 +52,7 @@ export default function Page() {
             </Suspense>
           </View>
         </div>
-        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
+        <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
           <View
             orbit
             className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
@@ -68,22 +64,11 @@ export default function Page() {
               <Ground />
             </Suspense>
           </View>
-          <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
-            <h1 className='text-4xl font-bold'>Building-2</h1>
-            <h1 className='font-semibold'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
-              egestas risus. Nunc lobortis ullamcorper arcu at tempor.
-            </h1>
-          </div>
+          <TextGenerator building={buildingText2} />
         </div>
-        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
-          <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
-            <h1 className='text-4xl font-bold'>Building-3</h1>
-            <h1 className='font-semibold'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
-              egestas risus. Nunc lobortis ullamcorper arcu at tempor.
-            </h1>
-          </div>
+        <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
+          <TextGenerator building={buildingText3} />
+
           <View
             orbit
             className='w-96 h-[30rem] ring-black ring-4 ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing'
@@ -96,40 +81,16 @@ export default function Page() {
             </Suspense>
           </View>
         </div>
-
-        {/* <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 p-4 m-12 place-items-center'>
-          <View orbit className='w-full h-96 cursor-grab active:cursor-grabbing'>
-            <Suspense fallback={null}>
-              <Building2 />
-              <Common />
-              <Dome url='/img/sky2.png' />
-            </Suspense>
-          </View>
-          <div className='flex flex-col justify-center items-start gap-8 ps-16 py-12'>
-            <h1 className='text-4xl font-bold'>Building</h1>
-            <h1 className='font-semibold'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
-              egestas risus. Nunc lobortis ullamcorper arcu at tempor. 
-            </h1>
-          </div>
-        </div>
-        <div className='min-h-[95vh] border-2 grid grid-cols-1 md:grid-cols-2 p-4 m-12 place-items-center'>
-          <div className='flex flex-col justify-center items-start gap-8 ps-16 py-12'>
-            <h1 className='text-4xl font-bold'>Building</h1>
-            <h1 className='font-semibold'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed augue lorem, suscipit id erat nec, porttitor
-              egestas risus. Nunc lobortis ullamcorper arcu at tempor. 
-            </h1>
-          </div>
-          <View orbit className='w-full h-96 cursor-grab active:cursor-grabbing'>
-            <Suspense fallback={null}>
-              <Building3 />
-              <Common />
-              <Dome url='/img/sky3.png' />
-            </Suspense>
-          </View>
-        </div> */}
       </div>
     </main>
+  )
+}
+
+const TextGenerator = ({ building }) => {
+  return (
+    <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
+      <h1 className='text-4xl font-bold'>{building.title}</h1>
+      <h1 className='font-semibold'>{building.description}</h1>
+    </div>
   )
 }
