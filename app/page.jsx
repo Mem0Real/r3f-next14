@@ -1,13 +1,11 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { Suspense, useEffect, useState } from 'react'
+import { useState } from 'react'
 import Navbar from './components/Navbar'
 import { Dome } from '@/components/canvas/View'
 import { Ground } from '@/components/canvas/Ground'
 
-import { buildingText1, buildingText2, buildingText3 } from '@/helpers/global'
-import { Button } from './components/ui/button'
 import { Generate } from './components/Generate'
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
