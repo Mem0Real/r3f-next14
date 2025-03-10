@@ -8,6 +8,7 @@ import { Ground } from '@/components/canvas/Ground'
 
 import { buildingText1, buildingText2, buildingText3 } from '@/helpers/global'
 import { Button } from './components/ui/button'
+import { Generate } from './components/Generate'
 
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
@@ -40,134 +41,26 @@ export default function Page() {
     <main className='w-full flex flex-col justify-between items-center gap-12 bg-stone-300'>
       <Navbar />
 
-      <div className='grid grid-cols-1 justify-items-center w-full lg:w-[90%]'>
-        <div
-          className={`min-h-[95vh] grid grid-cols-1 ${!active && 'md:grid-cols-2'} items-center justify-items-center gap-24 px-24`}
-        >
-          {!active && <TextGenerator building={buildingText1} />}
-          <div className='relative flex flex-col group'>
-            <View
-              orbit
-              zoom={active !== null}
-              className={`${active === 1 ? 'w-screen h-screen fixed top-0 left-0 z-10' : active ? 'hidden' : 'w-96 h-[30rem] ring-4'} ring-black ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing`}
-            >
-              <Suspense fallback={null}>
-                <Building1 />
-                <Common />
-                <Dome url='/img/sky1HD.png' />
-                <Ground />
-              </Suspense>
-            </View>
-            <div
-              className={`h-12 flex-col justify-center items-center text-3xl bottom-0 left-1/2 -translate-x-1/2 z-20 hidden group-hover:flex ${active ? 'fixed' : 'w-full absolute rounded-b-3xl'} overflow-clip`}
-            >
-              <Button
-                variant={active ? 'outline' : 'ghost'}
-                className='bg-stone-800 text-neutral-200'
-                onClick={() => setActive((prev) => (prev !== null ? null : 1))}
-              >
-                {active ? 'Leave Scene' : 'Enter Scene'}
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
-          <div className='relative flex flex-col group'>
-            <View
-              orbit
-              zoom={active !== null}
-              className={`${active === 2 ? 'w-screen h-screen fixed top-0 left-0 z-10' : active ? 'hidden' : 'w-96 h-[30rem] ring-4'} ring-black ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing`}
-            >
-              <Suspense fallback={null}>
-                <Building2 />
-                <Common />
-                <Dome url='/img/sky2HD.png' />
-                <Ground />
-              </Suspense>
-            </View>
-            <div
-              className={`h-12 flex-col justify-center items-center text-3xl bottom-0 left-1/2 -translate-x-1/2 z-20 hidden group-hover:flex ${active ? 'fixed' : 'w-full absolute rounded-b-3xl'} overflow-clip`}
-            >
-              <Button
-                variant={active ? 'outline' : 'ghost'}
-                className='bg-stone-800 text-neutral-200'
-                onClick={() => setActive((prev) => (prev !== null ? null : 2))}
-              >
-                {active ? 'Leave Scene' : 'Enter Scene'}
-              </Button>
-            </div>
-          </div>
-          <TextGenerator building={buildingText2} />
-        </div>
-        <div className='min-h-[95vh] grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-24 px-24 overflow-hidden'>
-          <TextGenerator building={buildingText3} />
-          <div className='relative flex flex-col group'>
-            <View
-              orbit
-              zoom={active !== null}
-              className={`${active === 3 ? 'w-screen h-screen fixed top-0 left-0 z-10' : active ? 'hidden' : 'w-96 h-[30rem] ring-4'} ring-black ring-offset-4 z-10 rounded-3xl cursor-grab active:cursor-grabbing`}
-            >
-              <Suspense fallback={null}>
-                <Building3 />
-                <Common />
-                <Dome url='/img/sky3HD.png' />
-                <Ground />
-              </Suspense>
-            </View>
-            <div
-              className={`h-12 flex-col justify-center items-center text-3xl bottom-0 left-1/2 -translate-x-1/2 z-20 hidden group-hover:flex ${active ? 'fixed' : 'w-full absolute rounded-b-3xl'} overflow-clip`}
-            >
-              <Button
-                variant={active ? 'outline' : 'ghost'}
-                className='bg-stone-800 text-neutral-200'
-                onClick={() => setActive((prev) => (prev !== null ? null : 3))}
-              >
-                {active ? 'Leave Scene' : 'Enter Scene'}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  )
-}
-
-const TextGenerator = ({ building }) => {
-  return (
-    <div className='md:-mt-24 flex flex-col justify-center items-start gap-8 ps-16 py-12'>
-      <h1 className='text-4xl font-bold'>{building.title}</h1>
-      <h1 className='font-semibold'>{building.description}</h1>
-    </div>
-  )
-}
-
-const SceneViewer = ({ element }) => {
-  return (
-    <View className='w-screen h-screen left-0'>
-      {element === 1 ? (
-        <Suspense fallback={null}>
+      <div className='flex flex-col justify-center items-center gap-36 py-16 lg:w-[90%] 2xl:w-[70%]'>
+        <Generate id={1} active={active} setActive={setActive}>
           <Building1 />
           <Common />
           <Dome url='/img/sky1HD.png' />
           <Ground />
-        </Suspense>
-      ) : element === 2 ? (
-        <Suspense fallback={null}>
+        </Generate>
+        <Generate id={2} active={active} setActive={setActive}>
           <Building2 />
           <Common />
           <Dome url='/img/sky2HD.png' />
           <Ground />
-        </Suspense>
-      ) : (
-        element === 3 && (
-          <Suspense fallback={null}>
-            <Building3 />
-            <Common />
-            <Dome url='/img/sky3HD.png' />
-            <Ground />
-          </Suspense>
-        )
-      )}
-    </View>
+        </Generate>
+        <Generate id={3} active={active} setActive={setActive}>
+          <Building3 />
+          <Common />
+          <Dome url='/img/sky3HD.png' />
+          <Ground />
+        </Generate>
+      </div>
+    </main>
   )
 }
